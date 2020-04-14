@@ -21,8 +21,9 @@ export class Cloud implements EntityInterface {
     const widthScale = game.canvas.width / w;
     const heightScale = game.canvas.height / h;
     const smallestScale = widthScale < heightScale ? widthScale : heightScale;
-    const availablePixels = game.canvas.width * smallestScale;
-    this.position = [-(availablePixels / 2) - 200, -300, this.rnd(0, 1000)];
+    const availablePixels = game.canvas.width / smallestScale;
+    this.position = [-(availablePixels / 2) - 320, -300, this.rnd(0, 1000)];
+    this.position[0] -= (this.position[2] / 3);
     //this.position=[-400,0,500];
     for(let i = 0; i < this.rnd(7, 15); i++){
       let x = this.rnd(-100, 100);

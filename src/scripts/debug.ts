@@ -26,8 +26,9 @@ export class Debug implements EntityInterface {
     const widthScale = game.canvas.width / w;
     const heightScale = game.canvas.height / h;
     const smallestScale = widthScale < heightScale ? widthScale : heightScale;
-    const availablePixels = game.canvas.width * game.scale;
+    const availablePixels = game.canvas.width / game.scale;
     c.fillRect(-availablePixels / 2,0, 10,10);
+    c.fillRect((availablePixels / 2) - 10,0, 10,10);
   }
 
 }
