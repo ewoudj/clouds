@@ -1,6 +1,7 @@
 import { EntityInterface } from './entity';
 import { Game } from './game';
 import { Cloud } from './cloud';
+import { renderText } from './text';
 
 export class CloudField implements EntityInterface {
   finished = false;
@@ -10,14 +11,14 @@ export class CloudField implements EntityInterface {
     private readonly game: Game
   ) {
     this.lastUpdated = game.now;
-    // for(let i = 0 ; i < 8; i++){
-    //     this.addCloud();
-    //   }
+    for(let i = 0 ; i < 8; i++){
+         this.addCloud(true);
+    }
   }
 
-  addCloud(): void {
+  addCloud(placeRandomOnScreen: boolean = false): void {
       const entities = this.game.entities;
-      let c = new Cloud(this.game);
+      let c = new Cloud(this.game, placeRandomOnScreen);
       let nextCloud = entities.find( e => e instanceof Cloud && e.position[2] < c.position[2]);
       nextCloud ? entities.splice(entities.indexOf(nextCloud),0, c) : entities.push(c);
   }
@@ -34,7 +35,10 @@ export class CloudField implements EntityInterface {
   }
 
   render(): void {
-    
+    var s = 8;
+    var sc = s * s;
+    renderText("ewoud", "yellow", s, this.game.context, [-(2.5 * sc) + s, -(sc * 2)]);
+    renderText("software", "yellow", s, this.game.context, [-(4 * sc) + s, -(sc)]);
   }
 
 }

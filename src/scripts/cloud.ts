@@ -13,7 +13,8 @@ export class Cloud implements EntityInterface {
   private velocity: number = 8;
 
   constructor(
-    private readonly game: Game
+    private readonly game: Game,
+    placeRandomOnScreen: boolean = false
   ) {
     this.lastUpdated = game.now;
     const h = game.logicalHeight;
@@ -23,7 +24,11 @@ export class Cloud implements EntityInterface {
     const smallestScale = widthScale < heightScale ? widthScale : heightScale;
     const availablePixels = game.canvas.width / smallestScale;
     this.position = [-(availablePixels / 2) - 320, -300, this.rnd(0, 1000)];
-    this.position[0] -= (this.position[2] / 3);
+    const s = (1000 - this.position[2])/ 1000;
+    this.position[0] = (this.position[0] / (s || 1));
+    if(placeRandomOnScreen){
+      this.position[0] = this.rnd(this.position[0], -this.position[0]);
+    }
     //this.position=[-400,0,500];
     for(let i = 0; i < this.rnd(7, 15); i++){
       let x = this.rnd(-100, 100);
