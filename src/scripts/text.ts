@@ -433,3 +433,23 @@ export function renderText(
   }
   context.restore();
 }
+
+export function getTextPoints(
+  text: string,
+  pixelSize: number,
+  position: [number, number]
+): Array<[number, number]> {
+  const result: Array<[number, number]> = [];
+  for (let offsets of Array.from(text).map((v, iV) => [iV, charMap[v]] || [iV, 0])) {
+    const charOffset = offsets[0] * 8 * pixelSize;
+    for (let i = 0; i < 8; i++) {
+      const byte = chars[i + offsets[1] * 8];
+      for (let bit = 0; bit < 8; bit++) {
+        if ((byte & Math.pow(2, bit)) === Math.pow(2, bit)) {
+          result.push([(7 - bit) * pixelSize + charOffset, i * pixelSize]);
+        }
+      }
+    }
+  }
+  return result;
+}

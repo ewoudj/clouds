@@ -6,11 +6,13 @@ import { renderText } from './text';
 export class CloudField implements EntityInterface {
   finished = false;
   private lastUpdated: number;
-  
+  private cloudLastAdded: number;
+
   constructor(
     private readonly game: Game
   ) {
     this.lastUpdated = game.now;
+    this.cloudLastAdded = game.now;
     for(let i = 0 ; i < 8; i++){
          this.addCloud(true);
     }
@@ -25,8 +27,9 @@ export class CloudField implements EntityInterface {
 
   update(now: number): void {
     this.lastUpdated = now;
-    if(this.rnd(0, 1000) === 6){
+    if(now - this.cloudLastAdded > 10000 && this.rnd(0, 1000) === 6){
         this.addCloud();
+        this.cloudLastAdded = now;
     }
   }
 

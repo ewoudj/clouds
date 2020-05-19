@@ -23,7 +23,7 @@ export class Cloud implements EntityInterface {
     const heightScale = game.canvas.height / h;
     const smallestScale = widthScale < heightScale ? widthScale : heightScale;
     const availablePixels = game.canvas.width / smallestScale;
-    this.position = [-(availablePixels / 2) - 320, -300, this.rnd(0, 1000)];
+    this.position = [-(availablePixels / 2) - 320, -300, (this.rnd(0, 20) * 100) - 1000];
     const s = (1000 - this.position[2])/ 1000;
     this.position[0] = (this.position[0] / (s || 1));
     if(placeRandomOnScreen){
