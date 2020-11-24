@@ -409,31 +409,6 @@ const charMap: { [character: string]: number } = {
   '+': 44,
 };
 
-export function renderText(
-  text: string,
-  color: string,
-  size: number,
-  context: CanvasRenderingContext2D,
-  position: [number, number]
-): void {
-  context.save();
-  context.fillStyle = color;
-  context.translate(Math.floor(position[0]), Math.floor(position[1]));
-  for (let offsets of Array.from(text).map((v, iV) => [iV, charMap[v]] || [iV, 0])) {
-    const charOffset = offsets[0] * 8 * size;
-    for (let i = 0; i < 8; i++) {
-      const byte = chars[i + offsets[1] * 8];
-      for (let bit = 0; bit < 8; bit++) {
-        if ((byte & Math.pow(2, bit)) === Math.pow(2, bit)) {
-          context.fillRect((7 - bit) * size + charOffset, i * size, size, size);
-          context.fillRect((7 - bit) * size + charOffset, i * size, size, size);
-        }
-      }
-    }
-  }
-  context.restore();
-}
-
 export function getTextPoints(
   text: string,
   pixelSize: number,
@@ -446,7 +421,10 @@ export function getTextPoints(
       const byte = chars[i + offsets[1] * 8];
       for (let bit = 0; bit < 8; bit++) {
         if ((byte & Math.pow(2, bit)) === Math.pow(2, bit)) {
-          result.push([(7 - bit) * pixelSize + charOffset, i * pixelSize]);
+          result.push([
+            (7 - bit) * pixelSize + charOffset + position[0],
+            i * pixelSize + position[1],
+          ]);
         }
       }
     }

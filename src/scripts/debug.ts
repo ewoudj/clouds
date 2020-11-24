@@ -3,12 +3,11 @@ import { Game } from './game';
 
 export class Debug implements EntityInterface {
   finished = false;
+  gameScale = true;
   private lastUpdated: number;
-  
-  constructor(
-    private readonly game: Game
-  ) {
-    this.lastUpdated = game.now;    
+
+  constructor(private readonly game: Game) {
+    this.lastUpdated = game.now;
   }
 
   update(now: number): void {
@@ -18,7 +17,7 @@ export class Debug implements EntityInterface {
   render(): void {
     const c = this.game.context;
     c.fillStyle = 'red';
-    c.fillRect(0,0, 10,10);
+    c.fillRect(0, 0, 10, 10);
 
     const game = this.game;
     const h = game.logicalHeight;
@@ -27,8 +26,7 @@ export class Debug implements EntityInterface {
     const heightScale = game.canvas.height / h;
     const smallestScale = widthScale < heightScale ? widthScale : heightScale;
     const availablePixels = game.canvas.width / game.scale;
-    c.fillRect(-availablePixels / 2,0, 10,10);
-    c.fillRect((availablePixels / 2) - 10,0, 10,10);
+    c.fillRect(-availablePixels / 2, 0, 10, 10);
+    c.fillRect(availablePixels / 2 - 10, 0, 10, 10);
   }
-
 }

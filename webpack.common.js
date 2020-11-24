@@ -64,18 +64,6 @@ module.exports = {
     extensions: ['.ts', '.js', 'scss'],
   },
 
-  devServer: {
-    contentBase: './dist',
-    clientLogLevel: 'info',
-    port: 8080,
-    inline: true,
-    historyApiFallback: false,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 500,
-    },
-  },
-
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -88,5 +76,4 @@ module.exports = {
     },
   },
 
-  devtool: 'inline-source-map',
 };
