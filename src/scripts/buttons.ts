@@ -45,25 +45,38 @@ export class Buttons implements EntityInterface {
     window.addEventListener('mousemove', ev => {
       const x = ev.clientX;
       const y = ev.clientY;
-      this.buttonUnderMouse = undefined;
-      this.buttons.forEach((b, i) => {
-        const currentRow = Math.floor(i / this.buttonsPerRow);
-        const left =
-          this.offsetLeft +
-          (i * this.buttonSize - currentRow * (this.buttonSize * this.buttonsPerRow));
-        const top =
-          this.offsetTop +
-          (this.game.canvas.height - this.availableHeight + currentRow * this.buttonSize);
-        if (x > left && x < left + this.buttonSize && y > top && y < top + this.buttonSize) {
-          this.buttonUnderMouse = b;
-        }
-      });
+      this.buttonUnderMouse = this.getButton(x, y)
     });
     window.addEventListener('mouseup', ev => {
       if (this.buttonUnderMouse) {
         window.location.href = this.buttonUnderMouse.url;
       }
     });
+    window.addEventListener('touchend', ev => {
+      for(let i = 0; i < ev.changedTouches.length; i++){
+        var b = this.getButton(ev.changedTouches[i].clientX, ev.changedTouches[i].clientY);
+        if(b){
+          window.location.href = b.url;
+        }
+      }
+    });
+  }
+
+  getButton(x: number, y: number): ButtonInterface | undefined {
+    let result = undefined;
+    this.buttons.forEach((b, i) => {
+      const currentRow = Math.floor(i / this.buttonsPerRow);
+      const left =
+        this.offsetLeft +
+        (i * this.buttonSize - currentRow * (this.buttonSize * this.buttonsPerRow));
+      const top =
+        this.offsetTop +
+        (this.game.canvas.height - this.availableHeight + currentRow * this.buttonSize);
+      if (x > left && x < left + this.buttonSize && y > top && y < top + this.buttonSize) {
+        result = b;
+      }
+    });
+    return result;
   }
 
   update(now: number): void {
