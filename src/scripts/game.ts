@@ -139,24 +139,11 @@ export class Game {
         {
           url: 'productions/laserwar/',
           icon: 'icons/laserwar.svg',
-        } /*,
-      {url:'', icon: 'icons/debris.svg'},
-      {url:'', icon: 'icons/debris.svg'},
-      {url:'', icon: 'icons/debris.svg'},
-      {url:'', icon: 'icons/debris.svg'},
-      {url:'', icon: 'icons/debris.svg'},
-      {url:'', icon: 'icons/debris.svg'},
-      {url:'', icon: 'icons/debris.svg'},
-      {url:''},
-      {url:''},
-      {url:''},
-      {url:''},
-      {url:''},
-      {url:''},
-      {url:''},
-      {url:''},
-      {url:''},
-      {url:''}*/,
+        },
+        {
+          url: 'productions/videopac/',
+          icon: 'icons/videopac.svg',
+        },
       ])
     );
     //this.entities.push(new Debug(this));

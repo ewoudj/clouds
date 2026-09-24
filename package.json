@@ -15,7 +15,8 @@
     "test-watch": "karma start --browsers ChromeHeadless",
     "build-debris": "mkdirp dist/productions && cd ../debris && npm run build && mv ./dist ../clouds/dist/productions/debris",
     "build-laserwar": "mkdirp dist/productions && cd ../miniengine && npm run build && mv ./dist ../clouds/dist/productions/laserwar",
-    "build-full": "npm run build && npm run build-debris && npm run build-laserwar"
+    "build-videopac": "mkdirp dist/productions && cd /Users/ewoudvandenboom/Desktop/videopac/web && npm run build:embed && rm -rf /Users/ewoudvandenboom/repos/clouds/dist/productions/videopac && cp -R dist /Users/ewoudvandenboom/repos/clouds/dist/productions/videopac",
+    "build-full": "npm run build && npm run build-debris && npm run build-laserwar && npm run build-videopac"
   },
   "license": "ISC",
   "devDependencies": {
@@ -37,8 +38,8 @@
     "karma-webpack": "^4.0.2",
     "mini-css-extract-plugin": "^0.8.0",
     "mkdirp": "^1.0.4",
-    "node-sass": "^4.14.1",
     "prettier": "^1.18.2",
+    "sass": "^1.77.8",
     "sass-loader": "^8.0.0",
     "ts-loader": "^6.2.0",
     "typescript": "^3.9.7",
@@ -47,7 +48,6 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.4.0"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=6.0.0"
   },

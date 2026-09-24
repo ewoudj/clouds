@@ -45,7 +45,7 @@ export class Buttons implements EntityInterface {
     window.addEventListener('mousemove', ev => {
       const x = ev.clientX;
       const y = ev.clientY;
-      this.buttonUnderMouse = this.getButton(x, y)
+      this.buttonUnderMouse = this.getButton(x, y);
     });
     window.addEventListener('mouseup', ev => {
       if (this.buttonUnderMouse) {
@@ -53,9 +53,9 @@ export class Buttons implements EntityInterface {
       }
     });
     window.addEventListener('touchend', ev => {
-      for(let i = 0; i < ev.changedTouches.length; i++){
+      for (let i = 0; i < ev.changedTouches.length; i++) {
         var b = this.getButton(ev.changedTouches[i].clientX, ev.changedTouches[i].clientY);
-        if(b){
+        if (b) {
           window.location.href = b.url;
         }
       }
